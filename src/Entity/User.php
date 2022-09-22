@@ -15,7 +15,7 @@ class User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['show_users', 'add_product'])]
+    #[Groups(['show_users', 'add_Possessions'])]
     private int $id;
 
     #[ORM\Column(length: 40)]
@@ -45,13 +45,13 @@ class User
     #[Groups(['show_users'])]
     private \DateTimeInterface $birthDate;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Product::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Possessions::class, orphanRemoval: true)]
     #[Groups(['show_users'])]
-    private Collection $product;
+    private Collection $possessions;
 
     public function __construct()
     {
-        $this->product = new ArrayCollection();
+        $this->Possessions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -143,29 +143,29 @@ class User
     }
 
     /**
-     * @return Collection<int, Product>
+     * @return Collection<int, Possessions>
      */
-    public function getProduct(): Collection
+    public function getPossessions(): Collection
     {
-        return $this->product;
+        return $this->possessions;
     }
 
-    public function addProduct(Product $product): self
+    public function addPossessions(Possessions $possessions): self
     {
-        if (!$this->product->contains($product)) {
-            $this->product->add($product);
-            $product->setUser($this);
+        if (!$this->possessions->contains($possessions)) {
+            $this->possessions->add($possessions);
+            $possessions->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeProduct(Product $product): self
+    public function removePossessions(Possessions $possessions): self
     {
-        if ($this->product->removeElement($product)) {
+        if ($this->possessions->removeElement($possessions)) {
             // set the owning side to null (unless already changed)
-            if ($product->getUser() === $this) {
-                $product->setUser(null);
+            if ($possessions->getUser() === $this) {
+                $possessions->setUser(null);
             }
         }
 
