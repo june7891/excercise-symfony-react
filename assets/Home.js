@@ -4,7 +4,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import UserList from './js/components/UserList';
-import UserForm from './js/components/UserForm';
+
 
 import UserDetails from './js/components/UserDetails';
 
@@ -16,7 +16,11 @@ function Home() {
    
         <Routes>
             <Route exact path="/" element={<UserList />} />
-            <Route exact path="/add" element={<UserForm />} />
+             
+      
+            {/* <Route exact path="/add" element={<UserForm />} /> */}
+                
+
             <Route path="/show/:id" element={<UserDetails />}/>
         </Routes>
         

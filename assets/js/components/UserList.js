@@ -3,10 +3,17 @@ import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import UserForm from './UserForm';
 
 function UserList() {
 
     const [users, setUsers] = useState([]);
+    const [isShow, setIsShow] = useState(true);
+
+  
+  const handleShow = () => {
+    setIsShow(!isShow);
+  };
 
     useEffect(() => {
       fetchUserList()
@@ -70,9 +77,13 @@ const handleDelete = (id) => {
       
     </tbody>
   </Table>
-  <Link to="/add"><Button variant="primary">
+  <Button variant="primary" onClick={handleShow}>
         Ajouter un utilisateur
-      </Button> </Link>
+      </Button>
+      {!isShow && 
+       <UserForm/>
+ }
+     
 
 </div>
   )
